@@ -99,6 +99,42 @@ void DB_interaction::add_on_stock_trade_unit(int type_id, QString trademark, QSt
 
    }
 }
+class empl
+{
+public:
+    void add_employee(QString, QString, QString, QDate);
+    void del_employee(QString, QString, QString, QDate);
+private:
+    int Status_id;
+};
+void empl::add_employee(QString name, QString surname, QString patronymic, QDate date_hired)
+{
+    QSqlQuery query;
+    cin >> name;
+    cin >> surname;
+    cin >> patronymic;
+    date_hired = QDate::currentDate();
+    query.prepare("insert into Employee(name, surname, patronymic, date_hired"
+                  "values(?, ?, ?, ?, ?");
+    query.addBindValue(name);
+    query.addBindValue(surname);
+    query.addBindValue(patronymic);
+    query.addBindValue(date_hired);
+    query.exec();
+
+
+
+}
+void empl::del_employee(QString name, QString surname, QString patronymic, QDate date_fired)
+{
+    QSqlQuery query;
+    cin >> name;
+    cin >> surname;
+    date_fired = QDate::currentDate();
+    query.prepare("insert into (select date_fired from Employee where name = ?, surname = ?) (date_fired)"
+                  "values(?) ");
+
+}
 
 int main(int argc, char *argv[])
 {
