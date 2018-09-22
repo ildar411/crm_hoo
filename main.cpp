@@ -133,6 +133,10 @@ void empl::del_employee(QString name, QString surname, QString patronymic, QDate
     date_fired = QDate::currentDate();
     query.prepare("insert into (select date_fired from Employee where name = ?, surname = ?) (date_fired)"
                   "values(?) ");
+    query.addBindValue(name);
+    query.addBindValue(surname);
+    query.addBindValue(date_fired);
+    query.exec();
 
 }
 
